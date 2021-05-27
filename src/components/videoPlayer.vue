@@ -1,11 +1,16 @@
 <template>
       <div class="card-video" v-if="video">
+        <!-- Title -->
         <h1 class="title-card" :style="'color:'+color">{{postTitle}}</h1>
+        
+        <!-- Video -->
         <div class="ratio-video"  v-aspect-ratio="aspectRatio">
           <vue-plyr  ref="player" >
               <video  controls crossorigin playsinline :src="video"  width="100" height="100" ></video>
           </vue-plyr>
         </div>
+        
+        <!-- Ratio Controls -->
         <div class="cn-ratio">
           <label v-for="(value, index) in valuesRatio" :key="index" :class="'radio-'+index">
                 <input

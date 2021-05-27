@@ -1,16 +1,20 @@
 <template>
   <div class="home">
     <div class="container">
-      <form v-if="FormMain" class="uploader-main">
+
+        <!-- Upload Control -->
+       <form v-if="FormMain" class="uploader-main">
         <div class="divi-file">
             <input type="file"  @change="onFileChange" >
         </div>
           <div class="title-video">
-            <verte v-model="getDataVideo.color" ></verte>
+            <verte v-model="getColor" ></verte>
             <input type="text" v-model="title" class="text-input" placeholder="Title" />
             <button  @click="uploadFile" class="upload-btn">Upload</button>
           </div>
         </form>
+        
+        <!--videoPlayer Component  -->
         <div v-if="setDataVideo.videoPreview " class="video-inner">
           <div class="rv-video-b"  @click="removeVideo"></div>
           <videoPlayer  :video="setDataVideo.videoPreview" :postTitle="setDataVideo.title"  :color="setDataVideo.color"/>
@@ -35,12 +39,9 @@ export default {
       formData: " ",
       imagePreview: null,
       FormMain: true,
-      getDataVideo:{
-        title: null,
-        videoPreview: null,
-        color: "#f0f",
-      },
-
+      getColor: "#f0f",
+      
+      // Data 
       setDataVideo:{
         title: null,
         videoPreview: null,
@@ -50,20 +51,22 @@ export default {
   },
 
   methods: {
+
+    // Upload File
     uploadFile () {
       if(this.imagePreview && this.title){
           this.setDataVideo.videoPreview = this.imagePreview;
           this.setDataVideo.title = this.title;
-          this.setDataVideo.color = this.getDataVideo.color;
+          this.setDataVideo.color = this.getColor;
           this.FormMain = false;
       }else if(!this.title){
           alert("Plz fill title")  
       }else if(!this.imagePreview){
           alert("Plz Chose Video")  
       }
-
     },
 
+    // Event SRC File 
     onFileChange(e){
       this.formData = e.target.files[0];
       if(e.target.files[0].type != "video/mp4"){
@@ -75,8 +78,9 @@ export default {
           }.bind(this), false);
           reader.readAsDataURL( this.formData);
       }
-
     },
+
+    // Event Remove Video
     removeVideo(){
       this.setDataVideo = {};
       this.FormMain= true;
