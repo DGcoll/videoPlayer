@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "v-aspect-ratio": "^2.0.1",
+    "verte": "0.0.12",
     "vue": "^2.6.11",
+    "vue-plyr": "^7.0.0",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
